@@ -5,6 +5,7 @@ import (
 	"crypto"
 	"crypto/tls"
 	"crypto/x509"
+	"fmt"
 	"net"
 	"net/http"
 	"strings"
@@ -63,6 +64,8 @@ func NewListener(l net.Listener, storage TLSStorage, caCert *x509.Certificate, c
 	dynamicListener.tlsConfig.GetCertificate = dynamicListener.getCertificate
 
 	if config.CloseConnOnCertChange {
+		fmt.Printf("jiandao == Certificates: %#v\n", dynamicListener.tlsConfig.Certificates)
+		fmt.Printf("jiandao == tlsConfig: %#v\n", dynamicListener.tlsConfig)
 		if len(dynamicListener.tlsConfig.Certificates) == 0 {
 			dynamicListener.tlsConfig.NextProtos = []string{"http/1.1"}
 		}
