@@ -68,7 +68,7 @@ func NewListener(l net.Listener, storage TLSStorage, caCert *x509.Certificate, c
 		fmt.Printf("jiandao === tlsConfig %+v\n", dynamicListener.tlsConfig)
 		fmt.Printf("jiandao === NextProtos %+v\n", dynamicListener.tlsConfig.NextProtos)
 		if len(dynamicListener.tlsConfig.Certificates) == 0 {
-			dynamicListener.tlsConfig.NextProtos = []string{"h2", "http/1.1"}
+			dynamicListener.tlsConfig.NextProtos = []string{"http/1.1"}
 		}
 		dynamicListener.conns = map[int]*closeWrapper{}
 	}
