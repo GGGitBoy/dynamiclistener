@@ -16,6 +16,8 @@ import (
 	"github.com/rancher/dynamiclistener/storage/kubernetes"
 	"github.com/rancher/dynamiclistener/storage/memory"
 	v1 "github.com/rancher/wrangler-api/pkg/generated/controllers/core/v1"
+
+	// v1 "github.com/rancher/wrangler/pkg/generated/controllers/core/v1"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/acme/autocert"
 )
