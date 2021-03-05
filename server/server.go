@@ -68,6 +68,9 @@ func ListenAndServe(ctx context.Context, httpsPort, httpPort int, handler http.H
 			ErrorLog: errorLog,
 		}
 
+		fmt.Printf("jiandao === las tlsServer %+v\n", tlsServer)
+		fmt.Printf("jiandao === las tlsTCPListener %+v\n", tlsTCPListener)
+
 		go func() {
 			logrus.Infof("Listening on %s:%d", opts.BindHost, httpsPort)
 			err := tlsServer.Serve(tlsTCPListener)

@@ -5,6 +5,7 @@ import (
 	"crypto"
 	"crypto/tls"
 	"crypto/x509"
+	"fmt"
 	"net"
 	"net/http"
 	"strings"
@@ -62,12 +63,18 @@ func NewListener(l net.Listener, storage TLSStorage, caCert *x509.Certificate, c
 	}
 	dynamicListener.tlsConfig.GetCertificate = dynamicListener.getCertificate
 
+	fmt.Printf("jiandao === Certificates %+v\n", len(dynamicListener.tlsConfig.Certificates))
 	if config.CloseConnOnCertChange {
+		fmt.Printf("jiandao === tlsConfig %+v\n", dynamicListener.tlsConfig)
+		fmt.Printf("jiandao === NextProtos %+v\n", dynamicListener.tlsConfig.NextProtos)
 		if len(dynamicListener.tlsConfig.Certificates) == 0 {
 			dynamicListener.tlsConfig.NextProtos = []string{"http/1.1"}
 		}
 		dynamicListener.conns = map[int]*closeWrapper{}
 	}
+	dynamicListener.conns = map[int]*closeWrapper{}
+	fmt.Printf("jiandao === end NextProtos %+v\n", dynamicListener.tlsConfig.NextProtos)
+	fmt.Printf("jiandao === end tlsConfig %+v\n", dynamicListener.tlsConfig)
 
 	if setter, ok := storage.(SetFactory); ok {
 		setter.SetFactory(dynamicListener.factory)

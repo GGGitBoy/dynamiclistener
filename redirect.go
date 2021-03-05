@@ -1,6 +1,7 @@
 package dynamiclistener
 
 import (
+	"fmt"
 	"net"
 	"net/http"
 	"strconv"
@@ -11,6 +12,11 @@ import (
 func HTTPRedirect(next http.Handler) http.Handler {
 	return http.HandlerFunc(
 		func(rw http.ResponseWriter, r *http.Request) {
+			fmt.Printf("jiandao === HTTPRedirect Content-Type %+v\n", r.Header)
+			fmt.Printf("jiandao === HTTPRedirect ProtoMajor %+v\n", r.ProtoMajor)
+			fmt.Printf("jiandao === HTTPRedirect TLS %+v\n", r.TLS)
+			fmt.Printf("jiandao === HTTPRedirect Path %+v\n", r.URL.Path)
+			fmt.Printf("jiandao === HTTPRedirect Method %+v\n", r.Method)
 			if r.TLS != nil ||
 				r.Header.Get("x-Forwarded-Proto") == "https" ||
 				r.Header.Get("x-Forwarded-Proto") == "wss" ||
